@@ -1,386 +1,141 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Museo de Arte Contemporáneo</title>
-    <link href="./dist/output.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --museum-gold: #d4af37;
-            --deep-charcoal: #1a1a1a;
-            --warm-white: #faf8f5;
-            --accent-rust: #b85c38;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Museo de Arte Contemporáneo</title>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <link href="./dist/output.css" rel="stylesheet" />
 
-        body {
-            font-family: 'Work Sans', sans-serif;
-        }
-
-        .hero-background {
-            background-image: url('imgs/museo-bg.webp');
-            background-size: cover;
-            background-position: center;
-        }
-
-
-        .hero-overlay {
-            background: linear-gradient(135deg, rgba(26, 26, 26, 0.7) 0%, rgba(184, 92, 56, 0.3) 100%);
-        }
-
-        .hero-content {
-            animation: fadeInUp 1.2s ease-out;
-        }
-
-
-        .hero-title {
-            font-family: 'Playfair Display', serif;
-        }
-
-        .hero-subtitle {
-            animation: fadeIn 1.5s ease-out 0.3s both;
-        }
-
-        .hero-cta {
-
-        }
-
-        .btn {
-            padding: 1rem 2.5rem;
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: 2px solid transparent;
-            letter-spacing: 0.05em;
-        }
-
-        .btn-primary {
-            background: var(--museum-gold);
-            color: var(--deep-charcoal);
-            border-color: var(--museum-gold);
-        }
-
-        .btn-primary:hover {
-            background: transparent;
-            color: var(--museum-gold);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--warm-white);
-            border-color: var(--warm-white);
-        }
-
-        .btn-secondary:hover {
-            background: var(--warm-white);
-            color: var(--deep-charcoal);
-            transform: translateY(-2px);
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 3rem;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--warm-white);
-            font-size: 0.875rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            animation: bounce 2s infinite;
-        }
-
-        .nav {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 2rem 4rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            animation: slideDown 1s ease-out;
-        }
-
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--warm-white);
-            text-decoration: none;
-            letter-spacing: 0.05em;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 3rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--warm-white);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 400;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--museum-gold);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--museum-gold);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .content-section {
-            padding: 8rem 4rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            color: var(--deep-charcoal);
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
-        }
-
-        .section-subtitle {
-            font-size: 1.2rem;
-            color: var(--accent-rust);
-            margin-bottom: 4rem;
-            font-weight: 300;
-            letter-spacing: 0.05em;
-        }
-
-        .exhibitions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-            margin-top: 4rem;
-        }
-
-        .exhibition-card {
-            position: relative;
-            overflow: hidden;
-            aspect-ratio: 3/4;
-            cursor: pointer;
-            transition: transform 0.5s ease;
-        }
-
-        .exhibition-card:hover {
-            transform: scale(1.02);
-        }
-
-        .exhibition-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .exhibition-card:hover .exhibition-image {
-            transform: scale(1.1);
-        }
-
-        .exhibition-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 2rem;
-            background: linear-gradient(to top, rgba(26, 26, 26, 0.95), transparent);
-            color: var(--warm-white);
-            transform: translateY(20%);
-            transition: transform 0.5s ease;
-        }
-
-        .exhibition-card:hover .exhibition-overlay {
-            transform: translateY(0);
-        }
-
-        .exhibition-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .exhibition-date {
-            font-size: 0.9rem;
-            color: var(--museum-gold);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-
-        .info-section {
-            background: var(--deep-charcoal);
-            color: var(--warm-white);
-            padding: 8rem 4rem;
-            margin-top: 6rem;
-        }
-
-        .info-grid {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 4rem;
-        }
-
-        .info-card h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: var(--museum-gold);
-            margin-bottom: 1rem;
-        }
-
-        .info-card p {
-            line-height: 1.8;
-            color: rgba(250, 248, 245, 0.8);
-        }
-
-        @media (max-width: 768px) {
-            .nav {
-                padding: 1.5rem 2rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .hero-content {
-                padding: 1rem;
-            }
-
-            .content-section {
-                padding: 4rem 2rem;
-            }
-
-            .exhibitions-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .info-section {
-                padding: 4rem 2rem;
-            }
-        }
-    </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <style> 
+  .hero-background {
+    background-image: url('imgs/museo-bg.webp');
+    }
+  </style>
 </head>
-<body class="m-0 p-0 box-border">
-    <!-- Navigation -->
-    <nav class="nav">
-        <a href="#" class="logo">MAC</a>
-        <ul class="nav-links">
-            <li><a href="#exposiciones">Exposiciones</a></li>
-            <li><a href="#visita">Visita</a></li>
-            <li><a href="#coleccion">Colección</a></li>
-            <li><a href="#eventos">Eventos</a></li>
-        </ul>
-    </nav>
 
-    <!-- Hero Section -->
-    <section class="relative min-h-screen overflow-hidden flex items-center justify-center">
-        <div class="hero-background absolute top-0 left-0 w-full h-full brightness-[0.4]"></div>
-        <div class="hero-overlay absolute top-0 left-0 w-full h-full"></div>
-        <div class="hero-content relative z-10 text-center p-8 max-w-[1200px]">
-            <div class="hero-subtitle text-[27px] text-[#d4af37] font-light tracking-[0.3em] uppercase mb-12">Donde el arte cobra vida</div>
-            <h1 class="hero-title text-[109px] font-bold text-[#faf8f5] tracking-[-0.02em] mb-10 text-shadow-[0 4px 20px rgba(0, 0, 0, 0.5)]">Museo de Tailwind</h1>
-            <div class="hero-cta inline-flex gap-6">
-                <a href="#exposiciones" class="inline-block px-10 py-4 text-base font-semibold no-underline transition-all duration-300 ease-in-out cursor-pointer border-2 border-[#d4af37] tracking-wider bg-[#d4af37] text-[#1a1a1a] hover:bg-transparent hover:text-[#d4af37] hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(212,175,55,0.3)]">Explorar Exposiciones</a>
-                <a href="#visita" class="btn btn-secondary">Planifica tu Visita</a>
-            </div>
-        </div>
-        <div class="scroll-indicator">Descubre más ↓</div>
-    </section>
+<body class="font-[Work Sans] text-[#1a1a1a]">
 
-    <!-- Exhibitions Section -->
-    <section class="content-section" id="exposiciones">
-        <h2 class="section-title">Exposiciones Actuales</h2>
-        <p class="section-subtitle">Experiencias artísticas que desafían la percepción</p>
+<!-- NAV -->
+<nav class="absolute top-0 left-0 w-full z-50 flex justify-between items-center px-16 py-8 animate-[slideDown_1s_ease-out]">
+  <a href="#" class="font-[Playfair Display] text-2xl font-bold tracking-wide text-[#faf8f5]">
+    MAC
+  </a>
 
-        <div class="exhibitions-grid">
-            <div class="exhibition-card">
-                <img src="https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?q=80&w=800" alt="Exposición 1" class="exhibition-image">
-                <div class="exhibition-overlay">
-                    <h3 class="exhibition-title">Voces Silenciosas</h3>
-                    <p class="exhibition-date">Hasta Marzo 2026</p>
-                </div>
-            </div>
+  <ul class="hidden md:flex gap-12 uppercase text-sm tracking-widest text-[#faf8f5]">
+    <li><a class="hover:text-[#d4af37] transition" href="#exposiciones">Exposiciones</a></li>
+    <li><a class="hover:text-[#d4af37] transition" href="#visita">Visita</a></li>
+    <li><a class="hover:text-[#d4af37] transition" href="#coleccion">Colección</a></li>
+    <li><a class="hover:text-[#d4af37] transition" href="#eventos">Eventos</a></li>
+  </ul>
+</nav>
 
-            <div class="exhibition-card">
-                <img src="https://images.unsplash.com/photo-1577083165633-14ebcdb0f658?q=80&w=800" alt="Exposición 2" class="exhibition-image">
-                <div class="exhibition-overlay">
-                    <h3 class="exhibition-title">Luz y Geometría</h3>
-                    <p class="exhibition-date">Hasta Abril 2026</p>
-                </div>
-            </div>
+<!-- HERO -->
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden">
 
-            <div class="exhibition-card">
-                <img src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?q=80&w=800" alt="Exposición 3" class="exhibition-image">
-                <div class="exhibition-overlay">
-                    <h3 class="exhibition-title">Naturaleza Urbana</h3>
-                    <p class="exhibition-date">Hasta Mayo 2026</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  <div class="hero-background absolute inset-0 bg-cover bg-center"></div>
+  <div class="absolute inset-0"></div>
 
-    <!-- Info Section -->
-    <section class="info-section" id="visita">
-        <div class="info-grid">
-            <div class="info-card">
-                <h3>Horarios</h3>
-                <p>Martes a Domingo<br>10:00 - 19:00<br><br>Lunes cerrado<br><br>Última entrada: 18:30</p>
-            </div>
+  <div class="relative z-10 text-center max-w-6xl px-8">
+    <p class="text-[#d4af37] text-xl tracking-[0.3em] uppercase font-light mb-12">
+      Donde el arte cobra vida
+    </p>
 
-            <div class="info-card">
-                <h3>Ubicación</h3>
-                <p>Av. Libertad 458<br>Centro Cultural<br>28001 Madrid<br><br>Metro: Sol (L1, L2, L3)</p>
-            </div>
+    <h1 class="font-[Playfair Display] text-[clamp(3rem,8vw,6.8rem)] font-bold text-[#faf8f5] mb-10 tracking-tight drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+      Museo de Tailwind
+    </h1>
 
-            <div class="info-card">
-                <h3>Tarifas</h3>
-                <p>General: 12€<br>Estudiantes: 8€<br>Menores de 12: Gratis<br><br>Miércoles entrada gratuita</p>
-            </div>
+    <div class="flex justify-center gap-6 flex-wrap">
+      <a href="#exposiciones"
+         class="px-10 py-4 border-2 border-[#d4af37] bg-[#d4af37] text-[#1a1a1a] font-semibold tracking-wider transition hover:bg-transparent hover:text-[#d4af37] hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(212,175,55,0.3)]">
+        Exposiciones
+      </a>
 
-            <div class="info-card">
-                <h3>Contacto</h3>
-                <p>info@mac-museo.es<br>Tel: +34 91 123 4567<br><br>Síguenos en redes sociales<br>@mac_museo</p>
-            </div>
-        </div>
-    </section>
+      <a href="#visita"
+         class="px-10 py-4 border-2 border-[#faf8f5] text-[#faf8f5] font-semibold tracking-wider transition hover:bg-[#faf8f5] hover:text-[#1a1a1a] hover:-translate-y-1">
+        Planifica tu Visita
+      </a>
+    </div>
+  </div>
+
+  <div class="absolute bottom-12 left-1/2 -translate-x-1/2 text-xs tracking-[0.2em] uppercase text-[#faf8f5] animate-bounce">
+    Descubre más ↓
+  </div>
+</section>
+
+<!-- EXPOSICIONES -->
+<section id="exposiciones" class="max-w-[1400px] mx-auto px-16 py-32">
+
+  <h2 class="font-[Playfair Display] text-[clamp(2.5rem,5vw,4rem)] font-bold mb-4">
+    Exposiciones Actuales
+  </h2>
+
+  <p class="text-[#b85c38] text-lg font-light tracking-wide mb-16">
+    Experiencias artísticas que desafían la percepción
+  </p>
+
+  <div class="grid gap-12 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+
+    <!-- CARD -->
+    <div class="relative overflow-hidden aspect-[3/4] group cursor-pointer">
+      <img src="https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?q=80&w=800"
+           class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+      <div class="absolute bottom-0 w-full p-8 bg-gradient-to-t from-black/95 to-transparent text-[#faf8f5] translate-y-1/4 transition group-hover:translate-y-0">
+        <h3 class="font-[Playfair Display] text-2xl font-bold mb-2">Voces Silenciosas</h3>
+        <p class="text-[#d4af37] text-sm tracking-widest uppercase">Hasta Marzo 2026</p>
+      </div>
+    </div>
+
+    <div class="relative overflow-hidden aspect-[3/4] group cursor-pointer">
+      <img src="https://images.unsplash.com/photo-1577083165633-14ebcdb0f658?q=80&w=800"
+           class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+      <div class="absolute bottom-0 w-full p-8 bg-gradient-to-t from-black/95 to-transparent text-[#faf8f5] translate-y-1/4 transition group-hover:translate-y-0">
+        <h3 class="font-[Playfair Display] text-2xl font-bold mb-2">Luz y Geometría</h3>
+        <p class="text-[#d4af37] text-sm tracking-widest uppercase">Hasta Abril 2026</p>
+      </div>
+    </div>
+
+    <div class="relative overflow-hidden aspect-[3/4] group cursor-pointer">
+      <img src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?q=80&w=800"
+           class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+      <div class="absolute bottom-0 w-full p-8 bg-gradient-to-t from-black/95 to-transparent text-[#faf8f5] translate-y-1/4 transition group-hover:translate-y-0">
+        <h3 class="font-[Playfair Display] text-2xl font-bold mb-2">Naturaleza Urbana</h3>
+        <p class="text-[#d4af37] text-sm tracking-widest uppercase">Hasta Mayo 2026</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- INFO -->
+<section id="visita" class="bg-[#1a1a1a] text-[#faf8f5] px-16 py-32">
+  <div class="max-w-[1400px] mx-auto grid gap-16 grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
+
+    <div>
+      <h3 class="font-[Playfair Display] text-2xl text-[#d4af37] mb-4">Horarios</h3>
+      <p class="leading-loose text-white/80">Martes a Domingo<br>10:00 - 19:00<br><br>Lunes cerrado<br><br>Última entrada: 18:30</p>
+    </div>
+
+    <div>
+      <h3 class="font-[Playfair Display] text-2xl text-[#d4af37] mb-4">Ubicación</h3>
+      <p class="leading-loose text-white/80">Av. Libertad 458<br>Centro Cultural<br>28001 Madrid<br><br>Metro: Sol (L1, L2, L3)</p>
+    </div>
+
+    <div>
+      <h3 class="font-[Playfair Display] text-2xl text-[#d4af37] mb-4">Tarifas</h3>
+      <p class="leading-loose text-white/80">General: 12€<br>Estudiantes: 8€<br>Menores de 12: Gratis<br><br>Miércoles entrada gratuita</p>
+    </div>
+
+    <div>
+      <h3 class="font-[Playfair Display] text-2xl text-[#d4af37] mb-4">Contacto</h3>
+      <p class="leading-loose text-white/80">info@mac-museo.es<br>Tel: +34 91 123 4567<br><br>@mac_museo</p>
+    </div>
+
+  </div>
+</section>
+
 </body>
 </html>
