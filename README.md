@@ -48,11 +48,3 @@ Este proyecto mantiene altos estándares de rendimiento y sostenibilidad:
 
 ---
 
-### ♻️ Buenas Prácticas Implementadas
-
-- 🖼️ Optimización de imágenes y recursos
-- 📦 Minificación de código
-- ⚡ Carga eficiente y asíncrona
-- 🎯 Código limpio y mantenible
-
-> 📅 Última medición: **4 de febrero de 2026**
